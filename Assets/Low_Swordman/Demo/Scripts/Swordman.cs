@@ -42,7 +42,7 @@ public class Swordman : PlayerController
 
 
 
-        if (Input.GetKeyDown(KeyCode.S))  //아래 버튼 눌렀을때. 
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))  //아래 버튼 눌렀을때. 
         {
 
             IsSit = true;
@@ -50,7 +50,7 @@ public class Swordman : PlayerController
 
 
         }
-        else if (Input.GetKeyUp(KeyCode.S))
+        else if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
         {
 
             m_Anim.Play("Idle");
@@ -62,7 +62,7 @@ public class Swordman : PlayerController
         // sit나 die일때 애니메이션이 돌때는 다른 애니메이션이 되지 않게 한다. 
         if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Sit") || m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.W) ||  Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
             {
                 if (currentJumpCount < JumpCount)  // 0 , 1
                 {
@@ -83,7 +83,7 @@ public class Swordman : PlayerController
 
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.X))
             {
 
 
@@ -116,7 +116,7 @@ public class Swordman : PlayerController
 
         // 기타 이동 인풋.
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
 
             if (isGrounded)  // 땅바닥에 있었을때. 
@@ -145,12 +145,12 @@ public class Swordman : PlayerController
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 return;
 
-            if (!Input.GetKey(KeyCode.A))
+            if (!Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.LeftArrow))
                 Filp(false);
 
 
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) ||  Input.GetKey(KeyCode.LeftArrow))
         {
 
 
@@ -177,14 +177,14 @@ public class Swordman : PlayerController
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 return;
 
-            if (!Input.GetKey(KeyCode.D))
+            if (!Input.GetKey(KeyCode.D) ||  Input.GetKey(KeyCode.RightArrow))
                 Filp(true);
 
 
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.W) ||  Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
         {
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 return;
