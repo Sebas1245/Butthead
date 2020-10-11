@@ -63,7 +63,7 @@ public abstract class PlayerController :MonoBehaviour
     {
 
 
-        transform.localScale = new Vector3(bLeft ? 1 : -1, 1, 1);
+        transform.localScale = new Vector3(bLeft ? 0.6f : -0.6f, 0.6f, 0.6f);
 
     }
 
