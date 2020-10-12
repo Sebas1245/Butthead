@@ -17,9 +17,9 @@ public abstract class PlayerController :MonoBehaviour
     protected Animator m_Anim;
 
     [Header("[Setting]")]
-    public float MoveSpeed = 6;
+    public float MoveSpeed = 5;
     public int JumpCount = 2;
-    public float jumpForce = 15f;
+    public float jumpForce = 11f;
 
     protected void AnimUpdate()
     {
