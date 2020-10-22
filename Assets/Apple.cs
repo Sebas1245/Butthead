@@ -18,9 +18,15 @@ public class Apple : MonoBehaviour
         Debug.Log(collision);
         if(collision.gameObject.tag == "Player")
         {
+            //StartCoroutine(PlaySound());
             AudioSource.PlayClipAtPoint(sound, transform.position);
             Destroy(gameObject);
         }
     }
-
+    /*IEnumerator PlaySound(){
+        source.Play();
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
+    }
+    */
 }
