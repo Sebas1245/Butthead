@@ -21321,6 +21321,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_SwordMan 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4432170184741061771, guid: db1f032c733b1b24398076a5c216703f, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0037536644
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432170184741061771, guid: db1f032c733b1b24398076a5c216703f, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.08860388
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432170184741061771, guid: db1f032c733b1b24398076a5c216703f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9070895
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db1f032c733b1b24398076a5c216703f, type: 3}
 --- !u!1001 &4822035334917934999
