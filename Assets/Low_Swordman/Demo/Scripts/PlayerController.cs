@@ -19,7 +19,7 @@ public abstract class PlayerController :MonoBehaviour
     [Header("[Setting]")]
     public float MoveSpeed = 5;
     public int JumpCount = 2;
-    public float jumpForce = 11f;
+    public float jumpForce = 9f;
 
     protected void AnimUpdate()
     {
@@ -56,15 +56,10 @@ public abstract class PlayerController :MonoBehaviour
 
     }
 
-
-
-
     protected void Filp(bool bLeft)
     {
 
-
         transform.localScale = new Vector3(bLeft ? 0.6f : -0.6f, 0.6f, 0.6f);
-
     }
 
 
@@ -89,7 +84,6 @@ public abstract class PlayerController :MonoBehaviour
         if (!isGrounded)
             return;
 
-
         if (!Is_DownJump_GroundCheck)
         {
             m_Anim.Play("Jump");
@@ -102,7 +96,6 @@ public abstract class PlayerController :MonoBehaviour
             StartCoroutine(GroundCapsulleColliderTimmerFuc());
 
         }
-
 
     }
 
