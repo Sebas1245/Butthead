@@ -56,7 +56,7 @@ public abstract class PlayerController :MonoBehaviour
 
     }
 
-    protected void Filp(bool bLeft)
+    protected void Flip(bool bLeft)
     {
 
         transform.localScale = new Vector3(bLeft ? 0.6f : -0.6f, 0.6f, 0.6f);

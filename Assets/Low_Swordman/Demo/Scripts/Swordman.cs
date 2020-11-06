@@ -146,7 +146,7 @@ public class Swordman : PlayerController
                 return;
 
             if (!Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.LeftArrow))
-                Filp(false);
+                Flip(false);
 
 
         }
@@ -178,7 +178,7 @@ public class Swordman : PlayerController
                 return;
 
             if (!Input.GetKey(KeyCode.D) ||  Input.GetKey(KeyCode.RightArrow))
-                Filp(true);
+                Flip(true);
 
 
         }
