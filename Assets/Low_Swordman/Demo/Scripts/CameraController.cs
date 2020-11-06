@@ -23,10 +23,13 @@ public class CameraController : MonoBehaviour {
 
     void Update()
     {
-        Vector3 Targetpos = new Vector3(Target.transform.position.x, Target.transform.position.y + PosY, -100);
+        float PosX = Target.transform.position.x;
+        if(PosX>91.47f)
+            PosX = 91.47f;
+        if(PosX<-2.46f)
+            PosX = -2.46f;
+        Vector3 Targetpos = new Vector3(PosX, PosY, -100);
         transform.position = Vector3.Lerp(transform.position, Targetpos, Time.deltaTime * Smoothvalue);
-
-
 
     }
 
