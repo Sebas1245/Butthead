@@ -2,10 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Swordman : PlayerController
 {
 
- 
+
+    public int maxHealth = 100;
+    public int currentHealth;
+    public HealthBar healthBar;
+    public float spawnPointX;
+    public float spawnPointY;
+    
+
+
 
     private void Start()
     {
@@ -13,16 +22,22 @@ public class Swordman : PlayerController
         m_CapsulleCollider  = this.transform.GetComponent<CapsuleCollider2D>();
         m_Anim = this.transform.Find("model").GetComponent<Animator>();
         m_rigidbody = this.transform.GetComponent<Rigidbody2D>();
-  
 
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
 
-
+    
     private void Update()
     {
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            TakeDamage(20);
 
+       
+        }
 
         checkInput();
 
@@ -33,6 +48,16 @@ public class Swordman : PlayerController
         }
 
 
+        while (currentHealth <= 0)
+        {
+            m_Anim.Play("Die");
+            healthBar.SetHealth(100);
+            currentHealth = 100;
+            transform.position = new Vector2(spawnPointX, spawnPointY);
+            
+
+
+        }
 
 
     }
@@ -108,11 +133,6 @@ public class Swordman : PlayerController
         }
 
 
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
-            m_Anim.Play("Die");
-
-        }
 
         // 기타 이동 인풋.
 
@@ -227,8 +247,12 @@ public class Swordman : PlayerController
 
     }
 
+     protected void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
 
-
+    }
 
 
 }
