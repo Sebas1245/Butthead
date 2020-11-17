@@ -12,12 +12,14 @@ public class EnemyController : MonoBehaviour
     public float scaleX = 2;
     public float scaleY = 2;
     bool facingRight = true;
-    
+    private int hitCount = 0;
+    protected Animator m_Anim;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         timer = changeTime;
+        m_Anim = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,5 +51,18 @@ public class EnemyController : MonoBehaviour
     {
 
         transform.localScale = new Vector3(bLeft ? -scaleX : scaleX, scaleY, 0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log(other.tag);
+        if(other.tag == "Sword") {
+            if(hitCount == 3) {
+                Destroy(gameObject);
+            }
+            else {
+                m_Anim.Play("rockHit");
+                hitCount++;
+            }
+        }
     }
 }

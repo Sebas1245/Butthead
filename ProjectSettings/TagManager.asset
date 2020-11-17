@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - EnemyRock
+  - DARig
+  - Boss1
+  - Sword
   layers:
   - Default
   - TransparentFX

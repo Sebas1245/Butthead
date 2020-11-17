@@ -11,6 +11,7 @@ public class BossController : MonoBehaviour
     public float VisionRadio = 2f, ClosenessRadio = 1f, Speed = 0.1f;
     public float scaleX = 0.4f;
     public float scaleY = 0.4f;
+    public bool facingRight = false;
     protected Animator m_Anim;
     // Start is called before the first frame update
     void Start()
@@ -28,11 +29,13 @@ public class BossController : MonoBehaviour
             // StartCoroutine(PathFinding());
             Vision = Physics2D.OverlapCircle(transform.position,VisionRadio, PlayerLayer);
             Vector3 Direction = Player.position - transform.position;
-            if(Direction.x > 0) {
-                Flip(true);
+            if(Direction.x < 0) {
+                Flip(facingRight);
+                facingRight = !facingRight;
             }
             else {
-                Flip(false);
+                Flip(facingRight);
+                facingRight = !facingRight;
             }
             m_Anim.Play("Run_02");
             transform.position += Direction * Speed * Time.deltaTime;
