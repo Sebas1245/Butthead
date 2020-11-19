@@ -12,7 +12,7 @@ public class Swordman : PlayerController
     public HealthBar healthBar;
     public float spawnPointX;
     public float spawnPointY;
-    
+    CameraController CameraScript;
 
 
 
@@ -23,20 +23,32 @@ public class Swordman : PlayerController
         m_Anim = this.transform.Find("model").GetComponent<Animator>();
         m_rigidbody = this.transform.GetComponent<Rigidbody2D>();
 
+        GameObject MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        CameraScript = MainCamera.GetComponent<CameraController>();
+
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
 
 
-    
+    void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.gameObject.tag == "Apple"){
+                TakeDamage(-5);
+            }
+            else if(collision.gameObject.tag == "EnemyRock")
+            {
+                TakeDamage(7);       
+            }
+            else if(collision.gameObject.tag == "Boss1"){
+                TakeDamage(15);       
+            }
+        }
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             TakeDamage(20);
-
-       
         }
 
         checkInput();
@@ -47,16 +59,14 @@ public class Swordman : PlayerController
 
         }
 
-
+        //Player dies
         while (currentHealth <= 0)
         {
             m_Anim.Play("Die");
             healthBar.SetHealth(100);
             currentHealth = 100;
             transform.position = new Vector2(spawnPointX, spawnPointY);
-            
-
-
+            CameraScript.InBossArea = false;
         }
 
 
@@ -160,8 +170,6 @@ public class Swordman : PlayerController
             }
 
 
-
-
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 return;
 
@@ -188,9 +196,7 @@ public class Swordman : PlayerController
             }
             else
             {
-
                 transform.transform.Translate(new Vector3(m_MoveX * MoveSpeed * Time.deltaTime, 0, 0));
-
             }
 
 
@@ -247,11 +253,10 @@ public class Swordman : PlayerController
 
     }
 
-     protected void TakeDamage(int damage)
+    protected void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-
     }
 
 

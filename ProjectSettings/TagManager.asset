@@ -9,6 +9,7 @@ TagManager:
   - DARig
   - Boss1
   - Sword
+  - Apple
   layers:
   - Default
   - TransparentFX

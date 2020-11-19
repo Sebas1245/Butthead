@@ -22,14 +22,13 @@ public class CameraController : MonoBehaviour {
      
     }
 
-
     void Update()
     {
         float PosX = Target.transform.position.x;
         if(PosX>PosXMax) { //91.47f 
             PosX = PosXMax;
             InBossArea = true;
-        } 
+        }
         if(PosX<PosXMin) //-2.46f 
             PosX = PosXMin;
         Vector3 Targetpos = new Vector3(PosX, PosY, -100);

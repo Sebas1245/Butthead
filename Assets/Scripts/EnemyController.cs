@@ -56,7 +56,7 @@ public class EnemyController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         Debug.Log(other.tag);
         if(other.tag == "Sword") {
-            if(hitCount == 3) {
+            if(hitCount == 2) {
                 Destroy(gameObject);
             }
             else {

@@ -13,6 +13,11 @@ public class BossController : MonoBehaviour
     public float scaleY = 0.4f;
     public bool facingRight = false;
     protected Animator m_Anim;
+    public int maxHealth = 100;
+    public int currentHealth;
+    public HealthBar healthBar;
+    public float maxX, maxY, minX, minY;
+    public bool BossDefeated = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +25,16 @@ public class BossController : MonoBehaviour
         GameObject MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         CameraScript = MainCamera.GetComponent<CameraController>();   
         m_Anim = this.GetComponent<Animator>();
+
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         
     }
 
     // Update is called once per frame
     void Update() {
         if(CameraScript.InBossArea){
-            // StartCoroutine(PathFinding());
+            
             Vision = Physics2D.OverlapCircle(transform.position,VisionRadio, PlayerLayer);
             Vector3 Direction = Player.position - transform.position;
             if(Direction.x < 0) {
@@ -40,6 +48,12 @@ public class BossController : MonoBehaviour
             m_Anim.Play("Run_02");
             transform.position += Direction * Speed * Time.deltaTime;
         }
+        while (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+            BossDefeated = true;
+            break;
+        }
     }
     void FixedUpdate()
     {
@@ -48,23 +62,20 @@ public class BossController : MonoBehaviour
 
     protected void Flip(bool bLeft)
     {
-
         transform.localScale = new Vector3(bLeft ? -scaleX : scaleX, scaleY, 0);
     }
-
-    IEnumerator PathFinding()
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log(other.tag);
+        if(other.tag == "Sword") {
+            TakeDamage(15);
+            float x = Random.Range(minX, maxX);
+            float y = Random.Range(minY,maxY);
+            transform.position = new Vector2(x, y);
+        }
+    }
+    protected void TakeDamage(int damage)
     {
-        yield return new WaitForSeconds(1);
-        Vision = Physics2D.OverlapCircle(transform.position,VisionRadio, PlayerLayer);
-        Vector3 Direction = Player.position - transform.position;
-        if(Direction.x > 0) {
-            Flip(true);
-        }
-        else {
-            Flip(false);
-        }
-        m_Anim.Play("Run_02");
-        transform.position += Direction*0.001f;
-        // transform.position += transform.forward * Direction.x * Speed * Time.deltaTime;
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
     }
 }
