@@ -30,11 +30,12 @@ public class Swordman : PlayerController
         healthBar.SetMaxHealth(maxHealth);
     }
 
-
+    
     void OnTriggerEnter2D(Collider2D collision)
         {
             if(collision.gameObject.tag == "Apple"){
-                TakeDamage(-5);
+                Debug.Log("apple");
+                Heal(5);
             }
             else if(collision.gameObject.tag == "EnemyRock")
             {
@@ -258,6 +259,10 @@ public class Swordman : PlayerController
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
     }
-
+    protected void Heal(int percentage)
+    {
+        currentHealth += percentage;
+        healthBar.SetHealth(currentHealth);
+    }
 
 }
