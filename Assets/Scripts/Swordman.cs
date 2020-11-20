@@ -34,7 +34,6 @@ public class Swordman : PlayerController
     void OnTriggerEnter2D(Collider2D collision)
         {
             if(collision.gameObject.tag == "Apple"){
-                Debug.Log("apple");
                 Heal(5);
             }
             else if(collision.gameObject.tag == "EnemyRock")
@@ -63,11 +62,10 @@ public class Swordman : PlayerController
         //Player dies
         while (currentHealth <= 0)
         {
+            StartCoroutine(spawn());
             m_Anim.Play("Die");
             healthBar.SetHealth(100);
             currentHealth = 100;
-            transform.position = new Vector2(spawnPointX, spawnPointY);
-            CameraScript.InBossArea = false;
         }
 
 
@@ -75,8 +73,6 @@ public class Swordman : PlayerController
 
     public void checkInput()
     {
-
-
 
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))  //아래 버튼 눌렀을때. 
         {
@@ -121,8 +117,6 @@ public class Swordman : PlayerController
         {
             if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.X))
             {
-
-
                 m_Anim.Play("Attack");
             }
             else
@@ -153,23 +147,16 @@ public class Swordman : PlayerController
             if (isGrounded)  // 땅바닥에 있었을때. 
             {
 
-
-
                 if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                     return;
 
                 transform.transform.Translate(Vector2.right* m_MoveX * MoveSpeed * Time.deltaTime);
 
-
-
             }
             else
             {
-
                 transform.transform.Translate(new Vector3(m_MoveX * MoveSpeed * Time.deltaTime, 0, 0));
-
             }
-
 
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 return;
@@ -177,16 +164,12 @@ public class Swordman : PlayerController
             if (!Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.LeftArrow))
                 Flip(false);
 
-
         }
         else if (Input.GetKey(KeyCode.A) ||  Input.GetKey(KeyCode.LeftArrow))
         {
 
-
             if (isGrounded)  // 땅바닥에 있었을때. 
             {
-
-
 
                 if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                     return;
@@ -247,11 +230,8 @@ public class Swordman : PlayerController
 
     protected override void LandingEvent()
     {
-
-
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Run") && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             m_Anim.Play("Idle");
-
     }
 
     protected void TakeDamage(int damage)
@@ -263,6 +243,13 @@ public class Swordman : PlayerController
     {
         currentHealth += percentage;
         healthBar.SetHealth(currentHealth);
+    }
+
+    IEnumerator spawn()
+    {
+        yield return new WaitForSeconds(.68f);
+        transform.position = new Vector2(spawnPointX, spawnPointY);
+        CameraScript.InBossArea = false;
     }
 
 }
