@@ -13,11 +13,16 @@ public class BossController : MonoBehaviour
     public float scaleY = 0.4f;
     public bool facingRight = false;
     protected Animator m_Anim;
+    //health
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar healthBar;
     public float maxX, maxY, minX, minY;
-    public bool BossDefeated = false;
+    bool BossDefeated = false;
+    //particles
+    bool playParticle = false;
+    public ParticleSystem smoke;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,12 +34,20 @@ public class BossController : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         
+        //particles
+        smoke = GetComponent<ParticleSystem>();
+        //smoke.Stop();
     }
 
     // Update is called once per frame
     void Update() {
+
+        healthBar.gameObject.SetActive(false); //deactivate boss health bar when not in boss zone
+
         if(CameraScript.InBossArea){
             
+            //enable health bar
+            healthBar.gameObject.SetActive(true); //activate boss health bar when in boss zone
             Vision = Physics2D.OverlapCircle(transform.position,VisionRadio, PlayerLayer);
             Vector3 Direction = Player.position - transform.position;
             if(Direction.x < 0) {
@@ -52,7 +65,13 @@ public class BossController : MonoBehaviour
         {
             Destroy(gameObject);
             BossDefeated = true;
+            playParticle = true;
             break;
+        }
+        //play die particle 
+        if(playParticle){
+            smoke.Play();
+            playParticle = false;
         }
     }
     void FixedUpdate()
