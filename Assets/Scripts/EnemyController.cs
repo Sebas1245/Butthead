@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     public float scaleY = 2;
     bool facingRight = true;
     private int hitCount = 0;
+    public int maxHitCount;
     protected Animator m_Anim;
     // Start is called before the first frame update
     void Start()
@@ -54,15 +55,21 @@ public class EnemyController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other.tag);
         if(other.tag == "Sword") {
-            if(hitCount == 2) {
-                Destroy(gameObject);
+            Debug.Log(hitCount);
+            if(hitCount == maxHitCount) {
+                m_Anim.Play("Hit");
+                StartCoroutine(DestroyObject());
             }
             else {
-                m_Anim.Play("rockHit");
+                m_Anim.Play("Hit");
                 hitCount++;
             }
         }
+    }
+    IEnumerator DestroyObject() {
+        yield return new WaitForSeconds(0.3f);
+        Destroy(gameObject);
+
     }
 }

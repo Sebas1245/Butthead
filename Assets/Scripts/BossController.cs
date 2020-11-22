@@ -8,7 +8,7 @@ public class BossController : MonoBehaviour
     CameraController CameraScript;
     public bool Vision, ClosenessLimit;
     public LayerMask PlayerLayer;
-    public float VisionRadio = 2f, ClosenessRadio = 1f, Speed = 0.1f;
+    public float VisionRadio = 2f, ClosenessRadio = 1f, Speed = 1f;
     public float scaleX = 0.4f;
     public float scaleY = 0.4f;
     public bool facingRight = false;
@@ -59,7 +59,8 @@ public class BossController : MonoBehaviour
                 facingRight = !facingRight;
             }
             m_Anim.Play("Run_02");
-            transform.position += Direction * Speed * Time.deltaTime;
+            // transform.position += Direction * Speed * Time.deltaTime;
+            transform.transform.Translate(new Vector3(Direction.x*0.65f, Direction.y*0.65f,0)*Speed*Time.deltaTime);
         }
         while (currentHealth <= 0)
         {
@@ -91,6 +92,7 @@ public class BossController : MonoBehaviour
             float y = Random.Range(minY,maxY);
             transform.position = new Vector2(x, y);
         }
+        
     }
     protected void TakeDamage(int damage)
     {

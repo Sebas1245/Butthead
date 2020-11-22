@@ -159,3 +159,4 @@ MonoBehaviour:
   changeTime: 3
   scaleX: 2.2
   scaleY: 2.2
+  maxHitCount: 3

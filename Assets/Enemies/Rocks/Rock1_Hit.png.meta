@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 830dd8d48aa5a8f459716fa67d6a740a
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 5365551930209190116
+    second: Rock1_Hit_0
+  - first:
+      213: 4499052079170799709
+    second: Rock1_Hit_1
+  - first:
+      213: 4425877685232168003
+    second: Rock1_Hit_2
+  - first:
+      213: -4012750021468252685
+    second: Rock1_Hit_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -87,7 +99,28 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Rock1_Hit_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 38
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f591fdad19df48c0800000000000000
+      internalID: -4012750021468252685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

@@ -13,6 +13,7 @@ public class Swordman : PlayerController
     public float spawnPointX;
     public float spawnPointY;
     CameraController CameraScript;
+    private bool attackable = true;
 
 
 
@@ -36,18 +37,18 @@ public class Swordman : PlayerController
         if(collision.gameObject.tag == "Apple"){
             Heal(5);
         }
-        else if(collision.gameObject.tag == "EnemyRock")
+        else if(collision.gameObject.tag == "EnemyRock" && attackable)
         {
             TakeDamage(7, collision.transform.position);       
         }
-        else if(collision.gameObject.tag == "Boss1"){
+        else if(collision.gameObject.tag == "Boss1" && attackable){
             TakeDamage(15, collision.transform.position);       
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
-        if(other.gameObject.tag == "EnemyRock") 
+        if(other.gameObject.tag == "EnemyRock" && attackable) 
         {
             TakeDamage(7, other.transform.position);
         }    
@@ -87,7 +88,7 @@ public class Swordman : PlayerController
 
             IsSit = true;
             m_Anim.Play("Sit");
-
+            attackable = true;
 
         }
         else if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
@@ -95,7 +96,7 @@ public class Swordman : PlayerController
 
             m_Anim.Play("Idle");
             IsSit = false;
-
+            attackable = true;
         }
 
 
@@ -126,6 +127,7 @@ public class Swordman : PlayerController
             if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.X))
             {
                 m_Anim.Play("Attack");
+                attackable = false;
             }
             else
             {
@@ -151,7 +153,7 @@ public class Swordman : PlayerController
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-
+            attackable = true;
             if (isGrounded)  // 땅바닥에 있었을때. 
             {
 
@@ -175,7 +177,7 @@ public class Swordman : PlayerController
         }
         else if (Input.GetKey(KeyCode.A) ||  Input.GetKey(KeyCode.LeftArrow))
         {
-
+            attackable = true;
             if (isGrounded)  // 땅바닥에 있었을때. 
             {
 
@@ -204,6 +206,7 @@ public class Swordman : PlayerController
 
         if (Input.GetKeyDown(KeyCode.W) ||  Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
         {
+            attackable = true;
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 return;
 
