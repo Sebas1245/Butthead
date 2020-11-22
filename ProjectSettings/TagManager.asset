@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - DARig
+  - Boss1
+  - Sword
+  - Apple
+  - Enemy
+  - BossWall
+  - BackgroundMusic
+  - BossMusic
   layers:
   - Default
   - TransparentFX
@@ -13,8 +22,8 @@ TagManager:
   - UI
   - 
   - 
-  - ground
   - background
+  - ground
   - 
   - 
   - 
