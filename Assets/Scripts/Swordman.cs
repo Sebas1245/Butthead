@@ -32,24 +32,32 @@ public class Swordman : PlayerController
 
     
     void OnTriggerEnter2D(Collider2D collision)
-        {
-            if(collision.gameObject.tag == "Apple"){
-                Heal(5);
-            }
-            else if(collision.gameObject.tag == "EnemyRock")
-            {
-                TakeDamage(7);       
-            }
-            else if(collision.gameObject.tag == "Boss1"){
-                TakeDamage(15);       
-            }
+    {
+        if(collision.gameObject.tag == "Apple"){
+            Heal(5);
         }
+        else if(collision.gameObject.tag == "EnemyRock")
+        {
+            TakeDamage(7, collision.transform.position);       
+        }
+        else if(collision.gameObject.tag == "Boss1"){
+            TakeDamage(15, collision.transform.position);       
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if(other.gameObject.tag == "EnemyRock") 
+        {
+            TakeDamage(7, other.transform.position);
+        }    
+    }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            TakeDamage(20);
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha1))
+        // {
+        //     TakeDamage(20);
+        // }
 
         checkInput();
 
@@ -234,8 +242,14 @@ public class Swordman : PlayerController
             m_Anim.Play("Idle");
     }
 
-    protected void TakeDamage(int damage)
+    protected void TakeDamage(int damage, Vector2 damagePos)
     {
+        m_Anim.Play("Die");
+        Debug.Log(Mathf.Ceil(transform.position.x-damagePos.x));
+        float direction = Mathf.Ceil(transform.position.x-damagePos.x) == 1 ? (1) : (-1);
+        // Debug.Log(Mathf.Abs(transform.position.y-damagePos.y));
+        //transform.position += new Vector3 (transform.position.x-damagePos.x, transform.position.y-damagePos.y, 0);
+        transform.position = new Vector2((transform.position.x+direction), 0);
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
     }
