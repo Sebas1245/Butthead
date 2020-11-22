@@ -19,6 +19,8 @@ public class BossController : MonoBehaviour
     public HealthBar healthBar;
     public GameObject bossWall;
     public float maxX, maxY, minX, minY;
+    // public AudioSource BackgroundMusicSource;
+    // public AudioClip BossClip;
     bool BossDefeated = false;
     //particles
     bool playParticle = false;
@@ -51,6 +53,8 @@ public class BossController : MonoBehaviour
             //enable health bar
             healthBar.gameObject.SetActive(true); //activate boss health bar when in boss zone
             bossWall.SetActive(true); // activate boss wall when in boss zone
+            // BackgroundMusicSource.clip = BossClip;
+            // BackgroundMusicSource.Play();
             // Vision = Physics2D.OverlapCircle(transform.position,VisionRadio, PlayerLayer);
             Vector3 Direction = Player.position - transform.position;
             Debug.Log("Direction x: " + Direction.x);

@@ -10,6 +10,9 @@ TagManager:
   - Sword
   - Apple
   - Enemy
+  - BossWall
+  - BackgroundMusic
+  - BossMusic
   layers:
   - Default
   - TransparentFX
