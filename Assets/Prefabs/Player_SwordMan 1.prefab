@@ -206,6 +206,13 @@ MonoBehaviour:
   MoveSpeed: 5
   JumpCount: 2
   jumpForce: 9
+  maxHealth: 100
+  currentHealth: 0
+  healthBar: {fileID: 0}
+  spawnPointX: 0
+  spawnPointY: 0
+  HitAudio: {fileID: 8300000, guid: 8d9d4bb7323efd14e95172a6bc4d9e13, type: 3}
+  AttackAudio: {fileID: 8300000, guid: 5b411704a93b0bf45b1710c71c07fe60, type: 3}
 --- !u!1 &4430699121564493219
 GameObject:
   m_ObjectHideFlags: 0

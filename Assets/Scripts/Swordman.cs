@@ -14,7 +14,7 @@ public class Swordman : PlayerController
     public float spawnPointY;
     CameraController CameraScript;
     private bool attackable = true;
-
+    public AudioClip HitAudio, AttackAudio, DieAudio, JumpAudio;
 
 
     private void Start()
@@ -72,6 +72,7 @@ public class Swordman : PlayerController
         {
             StartCoroutine(NotAttackable(1.2f));
             StartCoroutine(spawn());
+            AudioSource.PlayClipAtPoint(DieAudio, transform.position);
             m_Anim.Play("Die");
             healthBar.SetHealth(100);
             currentHealth = 100;
@@ -127,6 +128,7 @@ public class Swordman : PlayerController
             if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.X))
             {
                 StartCoroutine(NotAttackable(1f));
+                AudioSource.PlayClipAtPoint(AttackAudio, transform.position);
                 m_Anim.Play("Attack");
             }
             else
@@ -216,6 +218,7 @@ public class Swordman : PlayerController
         if (Input.GetKeyDown(KeyCode.W) ||  Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
         {
             attackable = true;
+            AudioSource.PlayClipAtPoint(JumpAudio, transform.position);
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
                 //StartCoroutine(NotAttackable(1f));
                 return;
@@ -259,6 +262,7 @@ public class Swordman : PlayerController
     protected void TakeDamage(int damage, Vector2 damagePos, float delay)
     {
         StartCoroutine(NotAttackable(delay));
+        AudioSource.PlayClipAtPoint(HitAudio, transform.position);
         m_Anim.Play("Die");
         Debug.Log(Mathf.Ceil(transform.position.x-damagePos.x));
         float direction = Mathf.Ceil(transform.position.x-damagePos.x) == 1 ? (1) : (-1);
