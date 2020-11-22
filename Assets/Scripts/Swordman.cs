@@ -37,7 +37,7 @@ public class Swordman : PlayerController
         if(collision.gameObject.tag == "Apple"){
             Heal(5);
         }
-        else if(collision.gameObject.tag == "EnemyRock" && attackable)
+        else if(collision.gameObject.tag == "Enemy" && attackable)
         {
             TakeDamage(7, collision.transform.position);       
         }
@@ -48,7 +48,7 @@ public class Swordman : PlayerController
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
-        if(other.gameObject.tag == "EnemyRock" && attackable) 
+        if(other.gameObject.tag == "Enemy" && attackable) 
         {
             TakeDamage(7, other.transform.position);
         }    

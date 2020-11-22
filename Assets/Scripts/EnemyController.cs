@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     int direction = 1;
     public float scaleX = 2;
     public float scaleY = 2;
-    bool facingRight = true;
+    public bool facingRight = true;
     private int hitCount = 0;
     public int maxHitCount;
     protected Animator m_Anim;
@@ -41,11 +41,12 @@ public class EnemyController : MonoBehaviour
 
         }
 
-        Vector2 position = rigidbody2D.position;
+        Vector2 position = transform.position;
 
-        position.x = position.x + direction * speed * Time.deltaTime;
+        // position.x = position.x + direction * speed * Time.deltaTime;
         
-        rigidbody2D.MovePosition(position);
+        // rigidbody2D.MovePosition(position);
+        transform.transform.Translate(new Vector3(1f*direction*speed*Time.deltaTime,0,0));
     }
 
     protected void Flip(bool bLeft)

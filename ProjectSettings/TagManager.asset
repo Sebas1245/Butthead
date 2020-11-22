@@ -5,11 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - EnemyRock
   - DARig
   - Boss1
   - Sword
   - Apple
+  - Enemy
   layers:
   - Default
   - TransparentFX
