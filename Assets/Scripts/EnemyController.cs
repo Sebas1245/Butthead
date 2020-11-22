@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public Rigidbody2D rigidbody2D;
+    // public Rigidbody2D rigidbody2D;
     public float speed;
     public float changeTime = 3.0f;
     float timer;
@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        // rigidbody2D = GetComponent<Rigidbody2D>();
         timer = changeTime;
         m_Anim = this.GetComponent<Animator>();
     }

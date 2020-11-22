@@ -11,12 +11,13 @@ public class BossController : MonoBehaviour
     public float VisionRadio = 2f, ClosenessRadio = 1f, Speed = 1f;
     public float scaleX = 0.4f;
     public float scaleY = 0.4f;
-    public bool facingRight = false;
+    public bool facingRight = true;
     protected Animator m_Anim;
     //health
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar healthBar;
+    public GameObject bossWall;
     public float maxX, maxY, minX, minY;
     bool BossDefeated = false;
     //particles
@@ -43,22 +44,24 @@ public class BossController : MonoBehaviour
     void Update() {
 
         healthBar.gameObject.SetActive(false); //deactivate boss health bar when not in boss zone
+        bossWall.SetActive(false); //deactivate boss health bar when not in boss zone
 
         if(CameraScript.InBossArea){
             
             //enable health bar
             healthBar.gameObject.SetActive(true); //activate boss health bar when in boss zone
-            Vision = Physics2D.OverlapCircle(transform.position,VisionRadio, PlayerLayer);
+            bossWall.SetActive(true); // activate boss wall when in boss zone
+            // Vision = Physics2D.OverlapCircle(transform.position,VisionRadio, PlayerLayer);
             Vector3 Direction = Player.position - transform.position;
+            Debug.Log("Direction x: " + Direction.x);
             if(Direction.x < 0) {
                 Flip(facingRight);
-                facingRight = !facingRight;
+                facingRight = true;
             }
             else {
                 Flip(facingRight);
-                facingRight = !facingRight;
+                facingRight = false;
             }
-            m_Anim.Play("Run_02");
             // transform.position += Direction * Speed * Time.deltaTime;
             transform.transform.Translate(new Vector3(Direction.x*0.65f, Direction.y*0.65f,0)*Speed*Time.deltaTime);
         }
@@ -75,10 +78,6 @@ public class BossController : MonoBehaviour
             playParticle = false;
         }
     }
-    void FixedUpdate()
-    {
-        
-    }
 
     protected void Flip(bool bLeft)
     {
@@ -87,6 +86,7 @@ public class BossController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         Debug.Log(other.tag);
         if(other.tag == "Sword") {
+            m_Anim.Play("Hit");
             TakeDamage(15);
             float x = Random.Range(minX, maxX);
             float y = Random.Range(minY,maxY);

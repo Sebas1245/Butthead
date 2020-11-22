@@ -20,7 +20,7 @@ public class GroundSensor : MonoBehaviour {
     {
     
 
-        if (other.CompareTag("Ground") || other.CompareTag("Block"))
+        if (other.CompareTag("Ground"))
         {
 
             if (other.CompareTag("Ground"))

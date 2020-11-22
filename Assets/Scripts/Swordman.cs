@@ -39,10 +39,10 @@ public class Swordman : PlayerController
         }
         else if(collision.gameObject.tag == "Enemy" && attackable)
         {
-            TakeDamage(7, collision.transform.position);       
+            TakeDamage(7, collision.transform.position, 1.2f);       
         }
         else if(collision.gameObject.tag == "Boss1" && attackable){
-            TakeDamage(15, collision.transform.position);       
+            TakeDamage(15, collision.transform.position, 0.8f);       
         }
     }
 
@@ -50,15 +50,14 @@ public class Swordman : PlayerController
     {
         if(other.gameObject.tag == "Enemy" && attackable) 
         {
-            TakeDamage(7, other.transform.position);
-        }    
+            TakeDamage(7, other.transform.position, 0.8f);
+        }
+        else if(other.gameObject.tag == "BossWall") {
+            TakeDamage(0, other.transform.position, 1f);
+        }   
     }
     private void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Alpha1))
-        // {
-        //     TakeDamage(20);
-        // }
 
         checkInput();
 
@@ -71,6 +70,7 @@ public class Swordman : PlayerController
         //Player dies
         while (currentHealth <= 0)
         {
+            StartCoroutine(NotAttackable(1.2f));
             StartCoroutine(spawn());
             m_Anim.Play("Die");
             healthBar.SetHealth(100);
@@ -126,8 +126,8 @@ public class Swordman : PlayerController
         {
             if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.X))
             {
+                StartCoroutine(NotAttackable(1f));
                 m_Anim.Play("Attack");
-                attackable = false;
             }
             else
             {
@@ -157,8 +157,11 @@ public class Swordman : PlayerController
             if (isGrounded)  // 땅바닥에 있었을때. 
             {
 
-                if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
+                    //StartCoroutine(NotAttackable(1f));
                     return;
+
+                }
 
                 transform.transform.Translate(Vector2.right* m_MoveX * MoveSpeed * Time.deltaTime);
 
@@ -168,8 +171,10 @@ public class Swordman : PlayerController
                 transform.transform.Translate(new Vector3(m_MoveX * MoveSpeed * Time.deltaTime, 0, 0));
             }
 
-            if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
+                //StartCoroutine(NotAttackable(1f));
                 return;
+            }
 
             if (!Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.LeftArrow))
                 Flip(false);
@@ -181,8 +186,10 @@ public class Swordman : PlayerController
             if (isGrounded)  // 땅바닥에 있었을때. 
             {
 
-                if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
+                    //StartCoroutine(NotAttackable(1f));
                     return;
+                }
 
 
                 transform.transform.Translate(Vector2.right * m_MoveX * MoveSpeed * Time.deltaTime);
@@ -194,8 +201,10 @@ public class Swordman : PlayerController
             }
 
 
-            if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
+                //StartCoroutine(NotAttackable(1f));
                 return;
+            }
 
             if (!Input.GetKey(KeyCode.D) ||  Input.GetKey(KeyCode.RightArrow))
                 Flip(true);
@@ -207,8 +216,10 @@ public class Swordman : PlayerController
         if (Input.GetKeyDown(KeyCode.W) ||  Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
         {
             attackable = true;
-            if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
+                //StartCoroutine(NotAttackable(1f));
                 return;
+            }
 
 
             if (currentJumpCount < JumpCount)  // 0 , 1
@@ -245,14 +256,14 @@ public class Swordman : PlayerController
             m_Anim.Play("Idle");
     }
 
-    protected void TakeDamage(int damage, Vector2 damagePos)
+    protected void TakeDamage(int damage, Vector2 damagePos, float delay)
     {
+        StartCoroutine(NotAttackable(delay));
         m_Anim.Play("Die");
         Debug.Log(Mathf.Ceil(transform.position.x-damagePos.x));
         float direction = Mathf.Ceil(transform.position.x-damagePos.x) == 1 ? (1) : (-1);
-        // Debug.Log(Mathf.Abs(transform.position.y-damagePos.y));
-        //transform.position += new Vector3 (transform.position.x-damagePos.x, transform.position.y-damagePos.y, 0);
-        transform.position = new Vector2((transform.position.x+direction), 0);
+        // transform.position = new Vector2((transform.position.x+direction), 0);
+        transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), 0, 0));
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
     }
@@ -267,6 +278,12 @@ public class Swordman : PlayerController
         yield return new WaitForSeconds(.68f);
         transform.position = new Vector2(spawnPointX, spawnPointY);
         CameraScript.InBossArea = false;
+        attackable = false;
+    }
+
+    IEnumerator NotAttackable(float delay){
+        attackable = false;
+        yield return new WaitForSeconds(delay);
     }
 
 }
