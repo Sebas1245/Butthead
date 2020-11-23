@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6181689397607610421}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -166,7 +166,7 @@ RectTransform:
   m_Children:
   - {fileID: 6181689396790662079}
   m_Father: {fileID: 6181689397607610421}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 6181689396866918860}
   - component: {fileID: 6181689396866918863}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: MainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,7 +399,7 @@ RectTransform:
   m_Children:
   - {fileID: 6181689397592846687}
   m_Father: {fileID: 6181689397607610421}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 6181689397511817693}
   - component: {fileID: 6181689397511817680}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ResumeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -607,7 +607,7 @@ RectTransform:
   m_Children:
   - {fileID: 6181689397644348311}
   m_Father: {fileID: 6181689397607610421}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -886,11 +886,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 6181689396984522351}
-  - {fileID: 8089528591570911842}
   - {fileID: 6181689397511817692}
   - {fileID: 6181689396866918862}
   - {fileID: 6181689396276132413}
   - {fileID: 7356374685259397666}
+  - {fileID: 8089528591570911842}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1348,7 +1348,7 @@ RectTransform:
   - {fileID: 8089528590510227143}
   - {fileID: 8089528590155449908}
   m_Father: {fileID: 6181689397607610421}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -38,8 +38,8 @@ public class BossController : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         
         //particles
-        smoke = GetComponent<ParticleSystem>();
-        //smoke.Stop();
+        smoke = GameObject.FindGameObjectWithTag("Smoke").GetComponent<ParticleSystem>();
+        smoke.Stop();
     }
 
     // Update is called once per frame
@@ -78,6 +78,7 @@ public class BossController : MonoBehaviour
         }
         //play die particle 
         if(playParticle){
+            //smoke.transform.position = transform.position;
             smoke.Play();
             playParticle = false;
         }
@@ -91,9 +92,10 @@ public class BossController : MonoBehaviour
         Debug.Log(other.tag);
         if(other.tag == "Sword") {
             m_Anim.Play("Hit");
-            TakeDamage(15);
+            TakeDamage(10);
             float x = Random.Range(minX, maxX);
             float y = Random.Range(minY,maxY);
+            smoke.transform.position = transform.position;
             transform.position = new Vector2(x, y);
         }
         

@@ -42,7 +42,7 @@ public class Swordman : PlayerController
             TakeDamage(7, collision.transform.position, 1.2f);       
         }
         else if(collision.gameObject.tag == "Boss1" && attackable){
-            TakeDamage(15, collision.transform.position, 0.8f);       
+            TakeDamage(20, collision.transform.position, 0.8f);       
         }
     }
 
@@ -264,16 +264,20 @@ public class Swordman : PlayerController
         StartCoroutine(NotAttackable(delay));
         AudioSource.PlayClipAtPoint(HitAudio, transform.position);
         m_Anim.Play("Die");
-        Debug.Log(Mathf.Ceil(transform.position.x-damagePos.x));
         float direction = Mathf.Ceil(transform.position.x-damagePos.x) == 1 ? (1) : (-1);
-        // transform.position = new Vector2((transform.position.x+direction), 0);
         transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), 0, 0));
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
     }
     protected void Heal(int percentage)
     {
-        currentHealth += percentage;
+        if(currentHealth + percentage <= 100) {
+            currentHealth += percentage;
+            
+        }
+        else {
+            currentHealth = 100;
+        }
         healthBar.SetHealth(currentHealth);
     }
 

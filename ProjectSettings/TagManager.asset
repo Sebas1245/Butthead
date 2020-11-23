@@ -13,6 +13,7 @@ TagManager:
   - BossWall
   - BackgroundMusic
   - BossMusic
+  - Smoke
   layers:
   - Default
   - TransparentFX
