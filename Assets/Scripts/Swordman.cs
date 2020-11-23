@@ -17,7 +17,8 @@ public class Swordman : PlayerController
     public AudioClip HitAudio, AttackAudio, DieAudio, JumpAudio;
     public GameObject BackgroundMusic;
     public GameObject BossMusic;
-
+    //public GameObject sword;
+    //public Collider2D sword;
 
     private void Start()
     {
@@ -41,10 +42,13 @@ public class Swordman : PlayerController
         }
         else if(collision.gameObject.tag == "Enemy" && attackable)
         {
-            TakeDamage(7, collision.transform.position, 1.2f);       
+            TakeDamage(7, collision.transform.position, 1.2f, true);       
         }
         else if(collision.gameObject.tag == "Boss1" && attackable){
-            TakeDamage(20, collision.transform.position, 0.8f);       
+            TakeDamage(20, collision.transform.position, 0.8f, true);       
+        }
+        else if(collision.gameObject.tag == "Spikes" && attackable){
+            TakeDamage(7, collision.transform.position, 2, false);
         }
     }
 
@@ -52,10 +56,10 @@ public class Swordman : PlayerController
     {
         if(other.gameObject.tag == "Enemy" && attackable) 
         {
-            TakeDamage(7, other.transform.position, 0.8f);
+            TakeDamage(7, other.transform.position, 0.8f, true);
         }
         else if(other.gameObject.tag == "BossWall") {
-            TakeDamage(0, other.transform.position, 1f);
+            TakeDamage(0, other.transform.position, 1f, true);
         }   
     }
     private void Update()
@@ -79,7 +83,7 @@ public class Swordman : PlayerController
             healthBar.SetHealth(100);
             currentHealth = 100;
         }
-
+        // sword.GetComponent<Collider2D>().enabled = false;
 
     }
 
@@ -120,11 +124,8 @@ public class Swordman : PlayerController
 
         m_MoveX = Input.GetAxis("Horizontal");
 
-
-   
         GroundCheckUpdate();
-
-
+        
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
             if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.X))
@@ -132,6 +133,7 @@ public class Swordman : PlayerController
                 StartCoroutine(NotAttackable(1f));
                 AudioSource.PlayClipAtPoint(AttackAudio, transform.position);
                 m_Anim.Play("Attack");
+                //sword.GetComponent<Collider2D>().enabled = true;
             }
             else
             {
@@ -144,13 +146,11 @@ public class Swordman : PlayerController
                 }
                 else
                 {
-
                     m_Anim.Play("Run");
                 }
 
             }
         }
-
 
 
         // 기타 이동 인풋.
@@ -204,7 +204,6 @@ public class Swordman : PlayerController
                 transform.transform.Translate(new Vector3(m_MoveX * MoveSpeed * Time.deltaTime, 0, 0));
             }
 
-
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
                 //StartCoroutine(NotAttackable(1f));
                 return;
@@ -212,7 +211,6 @@ public class Swordman : PlayerController
 
             if (!Input.GetKey(KeyCode.D) ||  Input.GetKey(KeyCode.RightArrow))
                 Flip(true);
-
 
         }
 
@@ -247,13 +245,7 @@ public class Swordman : PlayerController
 
         }
 
-
-
     }
-
-
-  
-
 
     protected override void LandingEvent()
     {
@@ -261,16 +253,22 @@ public class Swordman : PlayerController
             m_Anim.Play("Idle");
     }
 
-    protected void TakeDamage(int damage, Vector2 damagePos, float delay)
+    protected void TakeDamage(int damage, Vector2 damagePos, float delay, bool moveX)
     {
         StartCoroutine(NotAttackable(delay));
         AudioSource.PlayClipAtPoint(HitAudio, transform.position);
         m_Anim.Play("Die");
         float direction = Mathf.Ceil(transform.position.x-damagePos.x) == 1 ? (1) : (-1);
-        transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), 0, 0));
+        if(moveX) {
+            transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), 0, 0));
+        }
+        else {
+            transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), MoveSpeed*0.5f, 0));
+        }
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
     }
+
     protected void Heal(int percentage)
     {
         if(currentHealth + percentage <= 100) {

@@ -126,15 +126,11 @@ public abstract class PlayerController :MonoBehaviour
         {
             GroundCheckUpdateTic = 0;
 
-
-
             if (PretmpY == 0)
             {
                 PretmpY = transform.position.y;
                 return;
             }
-
-
 
             float reY = transform.position.y - PretmpY;  //    -1  - 0 = -1 ,  -2 -   -1 = -3
 
@@ -143,34 +139,23 @@ public abstract class PlayerController :MonoBehaviour
 
                 if (isGrounded)
                 {
-
                     LandingEvent();
                     OnceJumpRayCheck = false;
-
                 }
                 else
                 {
-
-                    Debug.Log("안부딪힘");
-
+                    //Debug.Log("안부딪힘");
+                    Debug.Log("Not bumping");
                 }
 
-
             }
-
 
             PretmpY = transform.position.y;
 
         }
 
-
-
-
     }
 
-
-
     protected abstract void LandingEvent();
-
 
 }

@@ -17,13 +17,14 @@ public class BossController : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar healthBar;
+    public HealthBar healthBarPlayer;
     public GameObject bossWall;
+    public GameObject endScreen;
     public float maxX, maxY, minX, minY;
     // public AudioSource BackgroundMusicSource;
     // public AudioClip BossClip;
     bool BossDefeated = false;
     //particles
-    bool playParticle = false;
     public ParticleSystem smoke;
 
     // Start is called before the first frame update
@@ -46,7 +47,8 @@ public class BossController : MonoBehaviour
     void Update() {
 
         healthBar.gameObject.SetActive(false); //deactivate boss health bar when not in boss zone
-        bossWall.SetActive(false); //deactivate boss health bar when not in boss zone
+        bossWall.SetActive(false); //deactivate boss Wall bar when not in boss zone
+        endScreen.SetActive(false);
 
         if(CameraScript.InBossArea){
             
@@ -57,7 +59,7 @@ public class BossController : MonoBehaviour
             // BackgroundMusicSource.Play();
             // Vision = Physics2D.OverlapCircle(transform.position,VisionRadio, PlayerLayer);
             Vector3 Direction = Player.position - transform.position;
-            Debug.Log("Direction x: " + Direction.x);
+            //Debug.Log("Direction x: " + Direction.x);
             if(Direction.x < 0) {
                 Flip(facingRight);
                 facingRight = true;
@@ -73,14 +75,17 @@ public class BossController : MonoBehaviour
         {
             Destroy(gameObject);
             BossDefeated = true;
-            playParticle = true;
             break;
         }
         //play die particle 
-        if(playParticle){
-            //smoke.transform.position = transform.position;
+        if(BossDefeated){
             smoke.Play();
-            playParticle = false;
+            healthBarPlayer.gameObject.SetActive(false);
+            healthBar.gameObject.SetActive(false);
+
+            //StartCoroutine(EndScreen());
+            StartCoroutine(EndScreen());
+            
         }
     }
 
@@ -105,4 +110,10 @@ public class BossController : MonoBehaviour
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
     }
+
+    IEnumerator EndScreen(){
+        //yield return new WaitForSeconds(0.5f);
+        endScreen.SetActive(true);
+    }
+
 }
