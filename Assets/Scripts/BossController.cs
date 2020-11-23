@@ -6,9 +6,7 @@ public class BossController : MonoBehaviour
 {
     public Transform Player;
     CameraController CameraScript;
-    public bool Vision, ClosenessLimit;
-    public LayerMask PlayerLayer;
-    public float VisionRadio = 2f, ClosenessRadio = 1f, Speed = 1f;
+    public float Speed = 1f;
     public float scaleX = 0.4f;
     public float scaleY = 0.4f;
     public bool facingRight = true;
@@ -19,15 +17,15 @@ public class BossController : MonoBehaviour
     public HealthBar healthBar;
     public HealthBar healthBarPlayer;
     public GameObject bossWall;
-    public GameObject endScreen;
     public float maxX, maxY, minX, minY;
     // public AudioSource BackgroundMusicSource;
     // public AudioClip BossClip;
-    bool BossDefeated = false;
+    public bool BossDefeated = false;
     //particles
     public ParticleSystem smoke;
-
-    // Start is called before the first frame update
+    public float Duration = 0.8f;
+    public GameObject Canvas;    // Start is called before the first frame update
+    bool executeFade = false;
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();   
@@ -48,18 +46,13 @@ public class BossController : MonoBehaviour
 
         healthBar.gameObject.SetActive(false); //deactivate boss health bar when not in boss zone
         bossWall.SetActive(false); //deactivate boss Wall bar when not in boss zone
-        endScreen.SetActive(false);
 
         if(CameraScript.InBossArea){
             
             //enable health bar
             healthBar.gameObject.SetActive(true); //activate boss health bar when in boss zone
             bossWall.SetActive(true); // activate boss wall when in boss zone
-            // BackgroundMusicSource.clip = BossClip;
-            // BackgroundMusicSource.Play();
-            // Vision = Physics2D.OverlapCircle(transform.position,VisionRadio, PlayerLayer);
             Vector3 Direction = Player.position - transform.position;
-            //Debug.Log("Direction x: " + Direction.x);
             if(Direction.x < 0) {
                 Flip(facingRight);
                 facingRight = true;
@@ -84,8 +77,11 @@ public class BossController : MonoBehaviour
             healthBar.gameObject.SetActive(false);
 
             //StartCoroutine(EndScreen());
-            StartCoroutine(EndScreen());
-            
+            executeFade = true;
+        }
+        if(executeFade) {
+            executeFade = false;
+            Fade();
         }
     }
 
@@ -111,9 +107,21 @@ public class BossController : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    IEnumerator EndScreen(){
-        yield return new WaitForSeconds(0.5f);
-        endScreen.SetActive(true);
+    public void Fade(){
+        CanvasGroup canvasGroup = Canvas.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 1f;
+        // StartCoroutine(DoFade(canvasGroup));
     }
+
+    public IEnumerator DoFade(CanvasGroup canvGroup) {
+        float start = canvGroup.alpha, end = 1f, counter = 0f;
+        while(counter < Duration) {
+            counter += Time.deltaTime;
+            canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
+            Debug.Log(canvGroup.alpha);
+
+            yield return null;
+        }
+    } 
 
 }

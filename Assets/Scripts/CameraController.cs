@@ -15,7 +15,8 @@ public class CameraController : MonoBehaviour {
     public bool InBossArea = false;
     public GameObject BackgroundMusic;
     public GameObject BossMusic;
-
+    public GameObject VictoryMusic;
+    BossController BossScript;
     // Use this for initialization
     public Coroutine my_co;
 
@@ -23,6 +24,7 @@ public class CameraController : MonoBehaviour {
     {
         BossMusic.SetActive(false);
         BackgroundMusic.SetActive(true);
+        BossScript = GameObject.FindGameObjectWithTag("Boss1").GetComponent<BossController>();
     }
 
     void Update()
@@ -37,6 +39,11 @@ public class CameraController : MonoBehaviour {
         if(PosX<PosXMin){ //-2.46f
             PosX = PosXMin;
         }  
+        if(BossScript.BossDefeated) {
+            BackgroundMusic.SetActive(false);
+            BossMusic.SetActive(false);
+            VictoryMusic.SetActive(true);
+        }
         Vector3 Targetpos = new Vector3(PosX, PosY, -100);
         transform.position = Vector3.Lerp(transform.position, Targetpos, Time.deltaTime * Smoothvalue);
 
