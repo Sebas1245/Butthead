@@ -112,7 +112,7 @@ public class BossController : MonoBehaviour
     }
 
     IEnumerator EndScreen(){
-        //yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);
         endScreen.SetActive(true);
     }
 
