@@ -1,0 +1,9 @@
+El segundo prototipo se encuentra en la rama "devLevel1Level2"
+
+-Aspecto de la rúbrica-        |    -Asset(s) donde se completa el Aspecto-
++ Pathfinding                  |    En el objeto Boss, en el script Boss Controller
++ Raycast                      |    Checkpoint (bandera), se modifica el spawnpoint cuando "Player" pasa
++ Interfaz gráfica (Botón)     |    Al presionar ESC, en menú de pausa
++ Interfaz gráfica (Imagen)    |    La barra de vida de Player y Boss
++ Interfaz gráfica (Texto)     |    En el menú de pausa
++ Sistema de particulas        |    Particulas en el Boss y al matar el Boss

@@ -15,6 +15,8 @@ public class Swordman : PlayerController
     CameraController CameraScript;
     private bool attackable = true;
     public AudioClip HitAudio, AttackAudio, DieAudio, JumpAudio;
+    public GameObject BackgroundMusic;
+    public GameObject BossMusic;
 
 
     private void Start()
@@ -287,6 +289,8 @@ public class Swordman : PlayerController
         transform.position = new Vector2(spawnPointX, spawnPointY);
         CameraScript.InBossArea = false;
         attackable = false;
+        BossMusic.SetActive(false);
+        BackgroundMusic.SetActive(true);
     }
 
     IEnumerator NotAttackable(float delay){

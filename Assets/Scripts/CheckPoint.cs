@@ -17,16 +17,18 @@ public class CheckPoint : MonoBehaviour
     {
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.up)* 1f, Color.red);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.up), 1f);
-        GameObject Player = hit.transform.gameObject;
-        //Opt1
-        if(Player.tag == "Player" && !Passed)
-        {
-            Passed = true;
-            AudioSource.PlayClipAtPoint(Clip, transform.position);
-            Swordman Script = Player.GetComponent<Swordman>();
-            Script.spawnPointX = transform.position.x;
-            Script.spawnPointY = transform.position.y;
+        if(hit){
+            GameObject Player = hit.transform.gameObject;
+            if(Player.tag == "Player" && !Passed)
+            {
+                Passed = true;
+                AudioSource.PlayClipAtPoint(Clip, transform.position);
+                Swordman Script = Player.GetComponent<Swordman>();
+                Script.spawnPointX = transform.position.x;
+                Script.spawnPointY = transform.position.y;
 
+            }
         }
+        
     }
 }

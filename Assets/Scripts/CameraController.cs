@@ -36,8 +36,6 @@ public class CameraController : MonoBehaviour {
         }
         if(PosX<PosXMin){ //-2.46f
             PosX = PosXMin;
-            BossMusic.SetActive(false);
-            BackgroundMusic.SetActive(true);
         }  
         Vector3 Targetpos = new Vector3(PosX, PosY, -100);
         transform.position = Vector3.Lerp(transform.position, Targetpos, Time.deltaTime * Smoothvalue);

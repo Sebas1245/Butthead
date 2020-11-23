@@ -28573,6 +28573,14 @@ PrefabInstance:
       propertyPath: DieAudio
       value: 
       objectReference: {fileID: 8300000, guid: 749e9b3a7df09be4780da562562466b0, type: 3}
+    - target: {fileID: 4429439388556744509, guid: db1f032c733b1b24398076a5c216703f, type: 3}
+      propertyPath: BackgroundMusic
+      value: 
+      objectReference: {fileID: 1231129307}
+    - target: {fileID: 4429439388556744509, guid: db1f032c733b1b24398076a5c216703f, type: 3}
+      propertyPath: BossMusic
+      value: 
+      objectReference: {fileID: 2000010596}
     - target: {fileID: 4430672533873592827, guid: db1f032c733b1b24398076a5c216703f, type: 3}
       propertyPath: m_Name
       value: Player_SwordMan 1
