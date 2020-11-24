@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Swordman : PlayerController
@@ -19,6 +20,11 @@ public class Swordman : PlayerController
     public GameObject BossMusic;
     //public GameObject sword;
     //public Collider2D sword;
+    public GameObject Heart1;
+    public GameObject Heart2;
+    public GameObject Heart3;
+    //private Queue Hearts = new Queue.<GameObject>();
+    private int Lives=3;
 
     private void Start()
     {
@@ -32,6 +38,9 @@ public class Swordman : PlayerController
 
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        // Hearts.Enqueue(Heart1);
+        // Hearts.Enqueue(Heart2);
+        // Hearts.Enqueue(Heart3);
     }
 
     
@@ -60,7 +69,10 @@ public class Swordman : PlayerController
         }
         else if(other.gameObject.tag == "BossWall") {
             TakeDamage(0, other.transform.position, 1f, true);
-        }   
+        }
+        else if(other.gameObject.tag == "Boss") {
+            TakeDamage(20, other.transform.position, 0.8f, true);
+        }
     }
     private void Update()
     {
@@ -82,9 +94,26 @@ public class Swordman : PlayerController
             m_Anim.Play("Die");
             healthBar.SetHealth(100);
             currentHealth = 100;
+            Lives--;
+            if(Lives == 2) {
+                Heart3.SetActive(false);
+            }
+            else if(Lives == 1) {
+                Heart2.SetActive(false);
+            }
+            else {
+                Heart1.SetActive(false);
+                // trigger start over menu
+            }
+            //GameObject Heart = Hearts.Dequeue();
+            //Heart.setActive(false);
         }
         // sword.GetComponent<Collider2D>().enabled = false;
-
+        if(Lives == 0){
+            //reload scene
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
     }
 
     public void checkInput()
@@ -257,13 +286,15 @@ public class Swordman : PlayerController
     {
         StartCoroutine(NotAttackable(delay));
         AudioSource.PlayClipAtPoint(HitAudio, transform.position);
-        m_Anim.Play("Die");
         float direction = Mathf.Ceil(transform.position.x-damagePos.x) == 1 ? (1) : (-1);
         if(moveX) {
-            transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), 0, 0));
+            //transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), 0, 0));
+            m_Anim.Play("Die");
+            m_rigidbody.MovePosition(new Vector3(transform.position.x+direction, 0, 0));
         }
         else {
-            transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), MoveSpeed*0.5f, 0));
+            // transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), MoveSpeed*0.5f, 0));
+            m_rigidbody.MovePosition(new Vector3(transform.position.x+direction, 2f, 0));
         }
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);

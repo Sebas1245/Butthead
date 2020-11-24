@@ -73,8 +73,10 @@ public class BossController : MonoBehaviour
         //play die particle 
         if(BossDefeated){
             smoke.Play();
-            healthBarPlayer.gameObject.SetActive(false);
-            healthBar.gameObject.SetActive(false);
+            // healthBarPlayer.gameObject.SetActive(false);
+            // healthBar.gameObject.SetActive(false);
+
+
 
             //StartCoroutine(EndScreen());
             executeFade = true;
