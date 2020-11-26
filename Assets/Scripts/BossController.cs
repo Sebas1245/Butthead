@@ -17,7 +17,7 @@ public class BossController : MonoBehaviour
     public HealthBar healthBar;
     public HealthBar healthBarPlayer;
     public GameObject bossWall;
-    public float maxX, maxY, minX, minY;
+    public float maxX, maxY, minX, minY, spawnPX, spawnPY;
     // public AudioSource BackgroundMusicSource;
     // public AudioClip BossClip;
     public bool BossDefeated = false;
@@ -64,6 +64,7 @@ public class BossController : MonoBehaviour
             // transform.position += Direction * Speed * Time.deltaTime;
             transform.transform.Translate(new Vector3(Direction.x*0.65f, Direction.y*0.65f,0)*Speed*Time.deltaTime);
         }
+        
         while (currentHealth <= 0)
         {
             Destroy(gameObject);
@@ -75,8 +76,6 @@ public class BossController : MonoBehaviour
             smoke.Play();
             // healthBarPlayer.gameObject.SetActive(false);
             // healthBar.gameObject.SetActive(false);
-
-
 
             //StartCoroutine(EndScreen());
             executeFade = true;

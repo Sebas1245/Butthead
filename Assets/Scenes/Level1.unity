@@ -6979,11 +6979,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4179238426413407344, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.681
+      value: 5.412
       objectReference: {fileID: 0}
     - target: {fileID: 4179238426413407344, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.897
+      value: -1.873
       objectReference: {fileID: 0}
     - target: {fileID: 4179238426413407344, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10159,7 +10159,7 @@ TilemapCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.04}
   m_MaximumTileChangeCount: 2000
   m_ExtrusionFactor: 0.00001
 --- !u!1001 &243933502
@@ -10796,6 +10796,8 @@ MonoBehaviour:
   maxY: 3
   minX: 87.47
   minY: -1.5
+  spawnPX: 95
+  spawnPY: 1.5
   BossDefeated: 0
   smoke: {fileID: 1323989634}
   Duration: 0.8
@@ -18069,7 +18071,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849303843}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.1, y: 1.658, z: -29.476768}
+  m_LocalPosition: {x: 55.1, y: 1.658, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -18982,7 +18984,7 @@ TilemapCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.038}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
 --- !u!1001 &891660029
@@ -19589,7 +19591,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2922541406961010787, guid: e3e2adc205bddd04da1c63cd3676e475, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.297
+      value: 23.121
       objectReference: {fileID: 0}
     - target: {fileID: 2922541406961010787, guid: e3e2adc205bddd04da1c63cd3676e475, type: 3}
       propertyPath: m_LocalPosition.y
@@ -31548,6 +31550,10 @@ PrefabInstance:
       propertyPath: Heart3
       value: 
       objectReference: {fileID: 1391823119}
+    - target: {fileID: 4429439388556744509, guid: db1f032c733b1b24398076a5c216703f, type: 3}
+      propertyPath: Boss
+      value: 
+      objectReference: {fileID: 336845858}
     - target: {fileID: 4430672533873592827, guid: db1f032c733b1b24398076a5c216703f, type: 3}
       propertyPath: m_Name
       value: Player_SwordMan 1

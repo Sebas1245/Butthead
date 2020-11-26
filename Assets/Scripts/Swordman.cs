@@ -16,6 +16,7 @@ public class Swordman : PlayerController
     CameraController CameraScript;
     private bool attackable = true;
     public AudioClip HitAudio, AttackAudio, DieAudio, JumpAudio;
+    public GameObject Boss;
     public GameObject BackgroundMusic;
     public GameObject BossMusic;
     //public GameObject sword;
@@ -70,7 +71,7 @@ public class Swordman : PlayerController
         else if(other.gameObject.tag == "BossWall") {
             TakeDamage(0, other.transform.position, 1f, true);
         }
-        else if(other.gameObject.tag == "Boss") {
+        else if(other.gameObject.tag == "Boss1") {
             TakeDamage(20, other.transform.position, 0.8f, true);
         }
     }
@@ -118,7 +119,7 @@ public class Swordman : PlayerController
 
     public void checkInput()
     {
-
+        // Debug.Log(m_Anim.GetCurrentAnimatorStateInfo(0));
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))  //아래 버튼 눌렀을때. 
         {
 
@@ -160,7 +161,6 @@ public class Swordman : PlayerController
             if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.X))
             {
                 StartCoroutine(NotAttackable(1f));
-                Debug.Log("Now attackable");
                 AudioSource.PlayClipAtPoint(AttackAudio, transform.position);
                 m_Anim.Play("Attack");
                 //sword.GetComponent<Collider2D>().enabled = true;
@@ -192,7 +192,7 @@ public class Swordman : PlayerController
             {
 
                 if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-                    //StartCoroutine(NotAttackable(1f));
+                    // StartCoroutine(NotAttackable(1f));
                     return;
 
                 }
@@ -206,7 +206,7 @@ public class Swordman : PlayerController
             }
 
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-                //StartCoroutine(NotAttackable(1f));
+                // StartCoroutine(NotAttackable(1f));
                 return;
             }
 
@@ -221,7 +221,7 @@ public class Swordman : PlayerController
             {
 
                 if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-                    //StartCoroutine(NotAttackable(1f));
+                    // StartCoroutine(NotAttackable(1f));
                     return;
                 }
 
@@ -235,7 +235,7 @@ public class Swordman : PlayerController
             }
 
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-                //StartCoroutine(NotAttackable(1f));
+                // StartCoroutine(NotAttackable(1f));
                 return;
             }
 
@@ -317,6 +317,7 @@ public class Swordman : PlayerController
     {
         yield return new WaitForSeconds(.68f);
         transform.position = new Vector2(spawnPointX, spawnPointY);
+        Boss.transform.transform.Translate(new Vector2(Boss.GetComponent<BossController>().spawnPX, Boss.GetComponent<BossController>().spawnPY));
         CameraScript.InBossArea = false;
         attackable = false;
         BossMusic.SetActive(false);
