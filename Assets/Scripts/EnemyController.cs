@@ -57,7 +57,6 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Sword") {
-            Debug.Log(hitCount);
             if(hitCount == maxHitCount) {
                 m_Anim.Play("Hit");
                 StartCoroutine(DestroyObject());

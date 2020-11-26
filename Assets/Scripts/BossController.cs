@@ -92,7 +92,6 @@ public class BossController : MonoBehaviour
         transform.localScale = new Vector3(bLeft ? -scaleX : scaleX, scaleY, 0);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other.tag);
         if(other.tag == "Sword") {
             m_Anim.Play("Hit");
             TakeDamage(10);

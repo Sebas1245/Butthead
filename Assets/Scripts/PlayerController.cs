@@ -142,11 +142,10 @@ public abstract class PlayerController :MonoBehaviour
                     LandingEvent();
                     OnceJumpRayCheck = false;
                 }
-                else
-                {
-                    //Debug.Log("안부딪힘");
-                    Debug.Log("Not bumping");
-                }
+                // else
+                // {
+                //     Debug.Log("Not bumping");
+                // }
 
             }
 

@@ -160,6 +160,7 @@ public class Swordman : PlayerController
             if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.X))
             {
                 StartCoroutine(NotAttackable(1f));
+                Debug.Log("Now attackable");
                 AudioSource.PlayClipAtPoint(AttackAudio, transform.position);
                 m_Anim.Play("Attack");
                 //sword.GetComponent<Collider2D>().enabled = true;
@@ -323,6 +324,7 @@ public class Swordman : PlayerController
     }
 
     IEnumerator NotAttackable(float delay){
+        Debug.Log("Not attackable");
         attackable = false;
         yield return new WaitForSeconds(delay);
     }
