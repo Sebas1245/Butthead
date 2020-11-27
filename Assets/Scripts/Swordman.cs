@@ -25,6 +25,8 @@ public class Swordman : PlayerController
     public GameObject Heart2;
     public GameObject Heart3;
     //private Queue Hearts = new Queue.<GameObject>();
+    public GameObject GameOver;
+    public AudioClip GameOverMusic;
     private int Lives=3;
 
     private void Start()
@@ -39,9 +41,10 @@ public class Swordman : PlayerController
 
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        // Hearts.Enqueue(Heart1);
-        // Hearts.Enqueue(Heart2);
-        // Hearts.Enqueue(Heart3);
+
+        GameOver.SetActive(false);
+        
+        Time.timeScale = 1f;
     }
 
     
@@ -105,37 +108,34 @@ public class Swordman : PlayerController
             else {
                 Heart1.SetActive(false);
                 // trigger start over menu
+                BackgroundMusic.SetActive(false);
             }
-            //GameObject Heart = Hearts.Dequeue();
-            //Heart.setActive(false);
         }
         // sword.GetComponent<Collider2D>().enabled = false;
         if(Lives == 0){
-            //reload scene
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            // new WaitForSeconds(1f);
+            StartCoroutine(GameOverScreen());
         }
     }
 
     public void checkInput()
     {
         // Debug.Log(m_Anim.GetCurrentAnimatorStateInfo(0));
+        if(Input.GetKeyDown(KeyCode.Alpha1)){   //BORRAR
+            TakeDamage(50, transform.position, 2, false);
+        }
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))  //아래 버튼 눌렀을때. 
         {
-
             IsSit = true;
             m_Anim.Play("Sit");
             attackable = true;
-
         }
         else if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
         {
-
             m_Anim.Play("Idle");
             IsSit = false;
             attackable = true;
         }
-
 
         // sit나 die일때 애니메이션이 돌때는 다른 애니메이션이 되지 않게 한다. 
         if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Sit") || m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
@@ -167,21 +167,17 @@ public class Swordman : PlayerController
             }
             else
             {
-
                 if (m_MoveX == 0)
                 {
                     if (!OnceJumpRayCheck)
                         m_Anim.Play("Idle");
-
                 }
                 else
                 {
                     m_Anim.Play("Run");
                 }
-
             }
         }
-
 
         // 기타 이동 인풋.
 
@@ -190,15 +186,11 @@ public class Swordman : PlayerController
             attackable = true;
             if (isGrounded)  // 땅바닥에 있었을때. 
             {
-
                 if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
                     // StartCoroutine(NotAttackable(1f));
                     return;
-
                 }
-
                 transform.transform.Translate(Vector2.right* m_MoveX * MoveSpeed * Time.deltaTime);
-
             }
             else
             {
@@ -212,22 +204,17 @@ public class Swordman : PlayerController
 
             if (!Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.LeftArrow))
                 Flip(false);
-
         }
         else if (Input.GetKey(KeyCode.A) ||  Input.GetKey(KeyCode.LeftArrow))
         {
             attackable = true;
             if (isGrounded)  // 땅바닥에 있었을때. 
             {
-
                 if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
                     // StartCoroutine(NotAttackable(1f));
                     return;
                 }
-
-
                 transform.transform.Translate(Vector2.right * m_MoveX * MoveSpeed * Time.deltaTime);
-
             }
             else
             {
@@ -241,7 +228,6 @@ public class Swordman : PlayerController
 
             if (!Input.GetKey(KeyCode.D) ||  Input.GetKey(KeyCode.RightArrow))
                 Flip(true);
-
         }
 
 
@@ -254,24 +240,19 @@ public class Swordman : PlayerController
                 return;
             }
 
-
             if (currentJumpCount < JumpCount)  // 0 , 1
             {
 
                 if (!IsSit)
                 {
                     prefromJump();
-
-
                 }
                 else
                 {
                     DownJump();
-
                 }
 
             }
-
 
         }
 
@@ -305,7 +286,6 @@ public class Swordman : PlayerController
     {
         if(currentHealth + percentage <= 100) {
             currentHealth += percentage;
-            
         }
         else {
             currentHealth = 100;
@@ -329,5 +309,13 @@ public class Swordman : PlayerController
         attackable = false;
         yield return new WaitForSeconds(delay);
     }
-
+    
+    IEnumerator GameOverScreen(){
+        yield return new WaitForSeconds(.7f);
+        Time.timeScale = 0f;
+        BackgroundMusic.SetActive(false);
+        GameOver.SetActive(true);
+        healthBar.gameObject.SetActive(false);
+        AudioSource.PlayClipAtPoint(GameOverMusic, transform.position);
+    }
 }
