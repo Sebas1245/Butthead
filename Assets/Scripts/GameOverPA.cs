@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOverPA : MonoBehaviour
 {
+    public AudioClip click;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class GameOverPA : MonoBehaviour
     }
     void OnMouseDown(){
         Time.timeScale = 0f;
+        AudioSource.PlayClipAtPoint(click, transform.position);
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }

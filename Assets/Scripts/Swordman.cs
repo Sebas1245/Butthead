@@ -60,9 +60,9 @@ public class Swordman : PlayerController
         else if(collision.gameObject.tag == "Boss1" && attackable){
             TakeDamage(20, collision.transform.position, 0.8f, true);       
         }
-        else if(collision.gameObject.tag == "Spikes" && attackable){
-            TakeDamage(7, collision.transform.position, 2, false);
-        }
+        // else if(collision.gameObject.tag == "Spikes" && attackable){
+        //     TakeDamage(7, collision.transform.position, 2, false);
+        // }
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
