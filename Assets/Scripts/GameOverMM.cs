@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameOverMM : MonoBehaviour
 {
     // Start is called before the first frame update
-    // public GameObject MainMenu;
-    // public GameObject PlayAgain;
     public AudioSource FX;
     public AudioClip hover;
     public AudioClip click;

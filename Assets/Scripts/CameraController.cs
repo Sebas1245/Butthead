@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour {
         }
         if(PosX<PosXMin){ //-2.46f
             PosX = PosXMin;
-        }  
+        }
         if(BossScript.BossDefeated) {
             BackgroundMusic.SetActive(false);
             BossMusic.SetActive(false);

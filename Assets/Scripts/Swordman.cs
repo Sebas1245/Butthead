@@ -24,7 +24,6 @@ public class Swordman : PlayerController
     public GameObject Heart1;
     public GameObject Heart2;
     public GameObject Heart3;
-    //private Queue Hearts = new Queue.<GameObject>();
     public GameObject GameOver;
     public AudioClip GameOverMusic;
     private int Lives=3;

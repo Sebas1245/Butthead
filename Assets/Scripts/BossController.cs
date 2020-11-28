@@ -24,9 +24,10 @@ public class BossController : MonoBehaviour
     //particles
     public ParticleSystem smoke;
     public float Duration = 0.8f;
-    public GameObject Canvas;    // Start is called before the first frame update
-    bool executeFade = false;
+    // public GameObject Canvas;    // Start is called before the first frame update
+    // bool executeFade = false;
     private Animator player_Anim;
+    public GameObject VictoryScreen;
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();   
@@ -42,6 +43,8 @@ public class BossController : MonoBehaviour
         //particles
         smoke = GameObject.FindGameObjectWithTag("Smoke").GetComponent<ParticleSystem>();
         smoke.Stop();
+
+        VictoryScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -77,16 +80,15 @@ public class BossController : MonoBehaviour
         //play die particle 
         if(BossDefeated){
             smoke.Play();
+            StartCoroutine(EndScreen());
             // healthBarPlayer.gameObject.SetActive(false);
             // healthBar.gameObject.SetActive(false);
-
-            //StartCoroutine(EndScreen());
-            executeFade = true;
+            // executeFade = true;
         }
-        if(executeFade) {
-            executeFade = false;
-            Fade();
-        }
+        // if(executeFade) {
+        //     executeFade = false;
+        //     Fade();
+        // }
     }
 
     protected void Flip(bool bLeft)
@@ -110,21 +112,28 @@ public class BossController : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    public void Fade(){
-        CanvasGroup canvasGroup = Canvas.GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 1f;
-        // StartCoroutine(DoFade(canvasGroup));
+    // public void Fade(){
+    //     CanvasGroup canvasGroup = Canvas.GetComponent<CanvasGroup>();
+    //     canvasGroup.alpha = 1f;
+    //     // StartCoroutine(DoFade(canvasGroup));
+    // }
+
+    // public IEnumerator DoFade(CanvasGroup canvGroup) {
+    //     float start = canvGroup.alpha, end = 1f, counter = 0f;
+    //     while(counter < Duration) {
+    //         counter += Time.deltaTime;
+    //         canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
+    //         Debug.Log(canvGroup.alpha);
+
+    //         yield return null;
+    //     }
+    // }
+    IEnumerator EndScreen(){
+        VictoryScreen.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        
+        // healthBar.gameObject.SetActive(false);
+        // AudioSource.PlayClipAtPoint(GameOverMusic, transform.position);
     }
-
-    public IEnumerator DoFade(CanvasGroup canvGroup) {
-        float start = canvGroup.alpha, end = 1f, counter = 0f;
-        while(counter < Duration) {
-            counter += Time.deltaTime;
-            canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
-            Debug.Log(canvGroup.alpha);
-
-            yield return null;
-        }
-    } 
 
 }

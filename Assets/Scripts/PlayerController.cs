@@ -24,23 +24,19 @@ public abstract class PlayerController :MonoBehaviour
     protected void AnimUpdate()
     {
 
-
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
 
-
                 m_Anim.Play("Attack");
             }
             else
             {
-
                 if (m_MoveX == 0)
                 {
                     if (!OnceJumpRayCheck)
                         m_Anim.Play("Idle");
-
                 }
                 else
                 {
@@ -119,7 +115,6 @@ public abstract class PlayerController :MonoBehaviour
             return;
 
         GroundCheckUpdateTic += Time.deltaTime;
-
 
 
         if (GroundCheckUpdateTic > GroundCheckUpdateTime)
