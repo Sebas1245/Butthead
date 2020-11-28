@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4179238426413407350}
   - component: {fileID: 4179238426413407351}
   - component: {fileID: 4179238426413407349}
-  - component: {fileID: 4179238426413407348}
   - component: {fileID: 4179238426413407355}
+  - component: {fileID: 8393547891250885416}
   m_Layer: 9
   m_Name: Rock_Enemy
   m_TagString: Enemy
@@ -117,31 +117,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &4179238426413407348
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4179238426413407345}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.022038653}
-  serializedVersion: 2
-  m_Radius: 0.15099904
 --- !u!114 &4179238426413407355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,3 +144,40 @@ MonoBehaviour:
   scaleY: 2.2
   facingRight: 1
   maxHitCount: 3
+--- !u!60 &8393547891250885416
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4179238426413407345}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.38, y: 0.34}
+    newSize: {x: 0.38, y: 0.34}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.041701514, y: 0.12529847}
+      - {x: -0.09762498, y: 0.09126197}
+      - {x: -0.14417464, y: 0.020686856}
+      - {x: -0.16423588, y: -0.06572497}
+      - {x: -0.13888718, y: -0.121762455}
+      - {x: -0.09946212, y: -0.124174654}
+      - {x: 0.014100134, y: -0.12946227}
+      - {x: 0.08831201, y: -0.124174654}
+      - {x: 0.14616257, y: -0.102746606}
+      - {x: 0.16708733, y: -0.042449366}
+      - {x: 0.12302453, y: 0.07823743}
+      - {x: 0.047161896, y: 0.12827477}

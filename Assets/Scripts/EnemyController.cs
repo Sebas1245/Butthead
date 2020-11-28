@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     public bool facingRight = true;
     private int hitCount = 0;
     public int maxHitCount;
+    private Animator player_Anim;
     protected Animator m_Anim;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class EnemyController : MonoBehaviour
         // rigidbody2D = GetComponent<Rigidbody2D>();
         timer = changeTime;
         m_Anim = this.GetComponent<Animator>();
+        player_Anim = GameObject.FindGameObjectWithTag("Model").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -56,7 +58,8 @@ public class EnemyController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Sword") {
+        // && player_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")
+        if(other.tag == "Sword"  && player_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
             if(hitCount == maxHitCount) {
                 m_Anim.Play("Hit");
                 StartCoroutine(DestroyObject());

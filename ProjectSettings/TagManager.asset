@@ -15,6 +15,7 @@ TagManager:
   - BossMusic
   - Smoke
   - Spikes
+  - Model
   layers:
   - Default
   - TransparentFX

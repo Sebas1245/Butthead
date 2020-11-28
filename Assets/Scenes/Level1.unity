@@ -753,11 +753,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4179238426413407349, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179238426413407349, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4179238426413407355, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
       propertyPath: changeTime
       value: 1.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4179238426413407349, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
 --- !u!4 &121960039 stripped
 Transform:
@@ -7037,7 +7046,8 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4179238426413407349, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
 --- !u!1001 &159354255
 PrefabInstance:
@@ -10993,8 +11003,8 @@ MonoBehaviour:
   maxY: 3
   minX: 87.47
   minY: -1.5
-  spawnPX: 95
-  spawnPY: 1.5
+  spawnPX: 96
+  spawnPY: 1.633
   BossDefeated: 0
   smoke: {fileID: 1323989634}
   Duration: 0.8
@@ -27511,7 +27521,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_Enemy (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4179238426413407349, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
 --- !u!1001 &1348124529
 PrefabInstance:
@@ -28810,10 +28821,13 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: -0.0027737916, y: 0.9289696}
-  - {x: -0.0374566, y: 0.44113737}
-  - {x: 0.023774495, y: 0.43455797}
-  - {x: 0.07720962, y: 0.43601966}
-  - {x: 0.12336658, y: 0.6383368}
+  - {x: -0.053765543, y: 0.85927}
+  - {x: -0.012907419, y: 0.8042375}
+  - {x: -0.00006963406, y: 0.7886761}
+  - {x: -0.00042672642, y: 0.74695265}
+  - {x: 0.029109722, y: 0.7500102}
+  - {x: 0.06056452, y: 0.7381772}
+  - {x: 0.06689536, y: 0.74327946}
   - {x: 0.12383246, y: 0.73317957}
   - {x: -0.0054085627, y: 0.93845046}
   m_AdjacentStartPoint: {x: 0, y: 0}
@@ -30000,7 +30014,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_Enemy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4179238426413407349, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c9194b5f9e5771b47b7916609da8fc17, type: 3}
 --- !u!1001 &1953134179
 PrefabInstance:
@@ -32227,6 +32242,10 @@ PrefabInstance:
     - target: {fileID: 4430672533873592827, guid: db1f032c733b1b24398076a5c216703f, type: 3}
       propertyPath: m_Name
       value: Player_SwordMan 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430876633882377391, guid: db1f032c733b1b24398076a5c216703f, type: 3}
+      propertyPath: m_TagString
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 4431187267567877115, guid: db1f032c733b1b24398076a5c216703f, type: 3}
       propertyPath: m_TagString

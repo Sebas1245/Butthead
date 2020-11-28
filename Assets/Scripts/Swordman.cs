@@ -55,6 +55,7 @@ public class Swordman : PlayerController
         }
         else if(collision.gameObject.tag == "Enemy" && attackable)
         {
+            Debug.Log("Enters trigger enter");
             TakeDamage(7, collision.transform.position, 1.2f, true);       
         }
         else if(collision.gameObject.tag == "Boss1" && attackable){
@@ -80,6 +81,10 @@ public class Swordman : PlayerController
     }
     private void Update()
     {
+
+        if(m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") || m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
+            attackable = false;
+        }
 
         checkInput();
 
@@ -160,7 +165,6 @@ public class Swordman : PlayerController
         {
             if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.X))
             {
-                StartCoroutine(NotAttackable(1f));
                 AudioSource.PlayClipAtPoint(AttackAudio, transform.position);
                 m_Anim.Play("Attack");
                 //sword.GetComponent<Collider2D>().enabled = true;
@@ -187,7 +191,6 @@ public class Swordman : PlayerController
             if (isGrounded)  // 땅바닥에 있었을때. 
             {
                 if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-                    // StartCoroutine(NotAttackable(1f));
                     return;
                 }
                 transform.transform.Translate(Vector2.right* m_MoveX * MoveSpeed * Time.deltaTime);
@@ -198,7 +201,6 @@ public class Swordman : PlayerController
             }
 
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-                // StartCoroutine(NotAttackable(1f));
                 return;
             }
 
@@ -211,7 +213,6 @@ public class Swordman : PlayerController
             if (isGrounded)  // 땅바닥에 있었을때. 
             {
                 if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-                    // StartCoroutine(NotAttackable(1f));
                     return;
                 }
                 transform.transform.Translate(Vector2.right * m_MoveX * MoveSpeed * Time.deltaTime);
@@ -222,7 +223,6 @@ public class Swordman : PlayerController
             }
 
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-                // StartCoroutine(NotAttackable(1f));
                 return;
             }
 
@@ -236,7 +236,6 @@ public class Swordman : PlayerController
             attackable = true;
             AudioSource.PlayClipAtPoint(JumpAudio, transform.position);
             if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
-                //StartCoroutine(NotAttackable(1f));
                 return;
             }
 
@@ -266,13 +265,12 @@ public class Swordman : PlayerController
 
     protected void TakeDamage(int damage, Vector2 damagePos, float delay, bool moveX)
     {
-        StartCoroutine(NotAttackable(delay));
         AudioSource.PlayClipAtPoint(HitAudio, transform.position);
         float direction = Mathf.Ceil(transform.position.x-damagePos.x) == 1 ? (1) : (-1);
         if(moveX) {
             //transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), 0, 0));
             m_Anim.Play("Die");
-            m_rigidbody.MovePosition(new Vector3(transform.position.x+direction, 0, 0));
+            m_rigidbody.MovePosition(new Vector3(transform.position.x+direction*MoveSpeed*0.35f, 0, 0));
         }
         else {
             // transform.transform.Translate(new Vector3((direction*MoveSpeed*0.3f), MoveSpeed*0.5f, 0));
@@ -297,7 +295,7 @@ public class Swordman : PlayerController
     {
         yield return new WaitForSeconds(.68f);
         transform.position = new Vector2(spawnPointX, spawnPointY);
-        Boss.transform.transform.Translate(new Vector2(Boss.GetComponent<BossController>().spawnPX, Boss.GetComponent<BossController>().spawnPY));
+        Boss.transform.position = new Vector2(Boss.GetComponent<BossController>().spawnPX, Boss.GetComponent<BossController>().spawnPY);
         CameraScript.InBossArea = false;
         attackable = false;
         BossMusic.SetActive(false);
@@ -307,7 +305,7 @@ public class Swordman : PlayerController
     IEnumerator NotAttackable(float delay){
         Debug.Log("Not attackable");
         attackable = false;
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(0.2f);
     }
     
     IEnumerator GameOverScreen(){
